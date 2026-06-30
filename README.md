@@ -16,29 +16,29 @@ Para asegurar la reproducibilidad y la transparencia institucional, se documenta
 
 ### 🔍 Tabla de Linaje de Código y Cambios Técnicos
 
-| Bloque Analítico | `S9 Version_Student_Proyecto_Landing_Experiment.ipynb` | `1_Github_AB_Test_Analysis_Final.ipynb` | `2_AB_Test_Analysis_mejorado.ipynb` | `3_AB_Test_Analysis_v2.ipynb` | `4_Proyecto_Final_AB_Test.ipynb` | Razón de la Refactorización y Mejora Obtenida |
+| Bloque Analítico | `<a href="./S9%20Version_Student_Proyecto_Landing_Experiment.ipynb">S9_Version_Student_<br>Proyecto_Landing_<br>Experiment.ipynb</a>` | `<a href="./notebooks/1_Github_AB_Test_Analysis_Final.ipynb">1_Github_AB_Test_<br>Analysis_Final.ipynb</a>` | `<a href="./notebooks/2_AB_Test_Analysis_mejorado.ipynb">2_AB_Test_Analysis_<br>mejorado.ipynb</a>` | `<a href="./notebooks/3_AB_Test_Analysis_v2.ipynb">3_AB_Test_Analysis_<br>v2.ipynb</a>` | `<a href="./4_Proyecto_Final_AB_Test.ipynb">4_Proyecto_Final_<br>AB_Test.ipynb</a>` | Razón de la Refactorización y Mejora Obtenida |
 | :--- | :---: | :---: | :---: | :---: | :---: | :--- |
-| **Carga de Entorno** | Celda 1 | Celda 1 *(Librerías estándar)* | Celda 1 *(Sin cambios)* | Celda 1 *(Añade multipletests)* | Celda 2 *(Configuración estética global, supresión de alertas)* | Profesionaliza el entorno ocultando advertencias de sintaxis y fijando una paleta homogénea (`Set2`). |
-| **Control SRM (Muestra)** | No existente | No existente | Celda 4 *(Mapeo plano)* | Celda 4 *(Cálculo Chi² manual)* | Celda 5 *(Validación robusta p=0.8572)* | **Eliminación de sesgo:** Asegura matemáticamente que el ruteo de usuarios fue totalmente balanceado y limpio. |
-| **Filtro de Contaminación** | No existente | No existente | No existente | Celda 5 *(Cruce de IDs)* | Celda 6 *(Reporte de duplicados = 0)* | **Garantía de Rigor:** Valida que ningún usuario haya sido expuesto a ambas variantes de manera simultánea. |
-| **Efecto Novedad** | No existente | No existente | No existente | Celda 6 *(Eje de tiempo vacío)* | Celdas 7-8 *(Serie diaria + Análisis de estabilidad)* | **Protección de Falsos Positivos:** Confirma que el éxito de B es estable y duradero, no una anomalía inicial. |
-| **Análisis de Gasto** | Vacío asignado | Celda 5 *(t-test estándar)* | Celda 6 *(t-test estándar)* | Celda 10-11 *(Levene + t-Welch + MWU)* | Celda 11-13 *(Añade Cohen's d = 0.2498)* | **Precisión Estadística:** Levene detectó varianzas distintas, obligando a cambiar a una robusta **t de Welch**. |
-| **Control de Outliers** | No existente | No existente | No existente | Celda 12 *(Filtro estadístico IQR)* | Celda 14-15 *(Comparativa de medias con/sin atípicos)* | **Robustez del Negocio:** Demuestra que la mejora en gasto no se debe a compradores masivos anómalos aislados. |
-| **Métrica Reina (RPV)** | No existente | No existente | No existente | Celda 15 *(Cálculo simple)* | Celda 16-18 *(Resolución formal de la Paradoja)* | **Traducción Financiera:** Unifica conversión y ticket promedio para reflejar un aumento directo del **+42.8%** por visita. |
-| **Resolución del Error Crítico** | No existente | No existente | Celda 15 *(Detiene ejecución por `KeyError: 'device'`)* | Celda 18 *(Parchado rudimentario)* | Celdas 19-23 *(Mapeo dinámico de variables reales)* | **Estabilidad de Software:** Elimina referencias a columnas muertas inexistentes en el archivo físico del dataset. |
-| **Reducción de Ruido** | No existente | No existente | No existente | Celda 24 *(Agrega V de Cramér / Bonferroni)* | Celdas Eliminadas por Diseño | **Navaja de Ockham:** Remoción de sobre-ingeniería matemática que no aportaba valor a la toma de decisiones. |
-| **Dashboard Ejecutivo** | Celdas vacías | Gráficos dispersos sin anotaciones | Gráficos individuales con `FutureWarning` | Celdas de dibujo independientes | Celda 26 *(Exportación de panel unificado PNG)* | **Estándar de Production-Ready:** Consolida métricas clave en una única imagen lista para el C-Level. |
+| **Carga de Entorno** | Celda 1 | Celda 1<br>*(Librerías estándar)* | Celda 1<br>*(Sin cambios)* | Celda 1<br>*(Añade multipletests)* | Celda 2<br>*(Configuración estética global, supresión de alertas)* | Profesionaliza el entorno ocultando advertencias de sintaxis y fijando una paleta homogénea (`Set2`). |
+| **Control SRM (Muestra)** | No existente | No existente | Celda 4<br>*(Mapeo plano)* | Celda 4<br>*(Cálculo Chi² manual)* | Celda 5<br>*(Validación robusta p=0.8572)* | **Eliminación de sesgo:** Asegura matemáticamente que el ruteo de usuarios fue totalmente balanceado y limpio. |
+| **Filtro de Contaminación** | No existente | No existente | No existente | Celda 5<br>*(Cruce de IDs)* | Celda 6<br>*(Reporte de duplicados = 0)* | **Garantía de Rigor:** Valida que ningún usuario haya sido expuesto a ambas variantes de manera simultánea. |
+| **Efecto Novedad** | No existente | No existente | No existente | Celda 6<br>*(Eje de tiempo vacío)* | Celdas 7-8<br>*(Serie diaria + Análisis de estabilidad)* | **Protección de Falsos Positivos:** Confirma que el éxito de B es estable y duradero, no una anomalía inicial. |
+| **Análisis de Gasto** | Vacío asignado | Celda 5<br>*(t-test estándar)* | Celda 6<br>*(t-test estándar)* | Celda 10-11<br>*(Levene + t-Welch + MWU)* | Celda 11-13<br>*(Añade Cohen's d = 0.2498)* | **Precisión Estadística:** Levene detectó varianzas distintas, obligando a cambiar a una robusta **t de Welch**. |
+| **Control de Outliers** | No existente | No existente | No existente | Celda 12<br>*(Filtro estadístico IQR)* | Celda 14-15<br>*(Comparativa de medias con/sin atípicos)* | **Robustez del Negocio:** Demuestra que la mejora en gasto no se debe a compradores masivos anómalos aislados. |
+| **Métrica Reina (RPV)** | No existente | No existente | No existente | Celda 15<br>*(Cálculo simple)* | Celda 16-18<br>*(Resolución formal de la Paradoja)* | **Traducción Financiera:** Unifica conversión y ticket promedio para reflejar un aumento directo del **+42.8%** por visita. |
+| **Resolución del Error Crítico** | No existente | No existente | Celda 15<br>*(Detiene ejecución por `KeyError: 'device'`)* | Celda 18<br>*(Parchado rudimentario)* | Celdas 19-23<br>*(Mapeo dinámico de variables reales)* | **Estabilidad de Software:** Elimina referencias a columnas muertas inexistentes en el archivo físico del dataset. |
+| **Reducción de Ruido** | No existente | No existente | No existente | Celda 24<br>*(Agrega V de Cramér / Bonferroni)* | Celdas Eliminadas por Diseño | **Navaja de Ockham:** Remoción de sobre-ingeniería matemática que no aportaba valor a la toma de decisiones. |
+| **Dashboard Ejecutivo** | Celdas vacías | Gráficos dispersos sin anotaciones | Gráficos individuales con `FutureWarning` | Celdas de dibujo independientes | Celda 26<br>*(Exportación de panel unificado PNG)* | **Estándar de Production-Ready:** Consolida métricas clave en una única imagen lista para el C-Level. |
 
 ---
 
 ### 🔍 Análisis de Defectos y Decisiones Clave
 
 1. **Resolución del Error Crítico de Variables Inexistentes (`KeyError: 'device'`):**
-   * *Defecto:* `2_AB_Test_Analysis_mejorado.ipynb` heredaba bucles iterativos automáticos sobre variables teóricas como `['region', 'device', 'traffic_source', 'user_type']`. Al ejecutarlo, pandas detenía la compilación mediante un `KeyError` debido a que estas columnas no existen en la estructura física del archivo.
-   * *Solución:* En `4_Proyecto_Final_AB_Test.ipynb` se mapeó la estructura real del dataset, restringiendo quirúrgicamente el código a interactuar con las variables categóricas reales: `traffic_source` y `user_type`.
+   * *Defecto:* El archivo `<a href="./notebooks/2_AB_Test_Analysis_mejorado.ipynb">2_AB_Test_Analysis_mejorado.ipynb</a>` heredaba bucles iterativos automáticos sobre variables teóricas como `['region', 'device', 'traffic_source', 'user_type']`. Al ejecutarlo, pandas detenía la compilación mediante un `KeyError` debido a que estas columnas no existen en la estructura física del archivo.
+   * *Solución:* En `<a href="./4_Proyecto_Final_AB_Test.ipynb">4_Proyecto_Final_AB_Test.ipynb</a>` se mapeó la estructura real del dataset, restringiendo quirúrgicamente el código a interactuar con las variables categóricas reales: `traffic_source` y `user_type`.
 2. **Mitigación del "Efecto Novedad" mediante Análisis Temporal:**
-   * *Defecto:* En `3_AB_Test_Analysis_v2.ipynb` la sección existía formalmente pero carecía de interpretación analítica, dejando una sección ciega sobre si el éxito inicial era transitorio.
-   * *Solución:* En `4_Proyecto_Final_AB_Test.ipynb` se calculó la serie diaria de la tasa de conversión. El comportamiento de la Página B demostró ser superior y estable día a día durante todo el periodo, descartando anomalías por curiosidad transitoria del usuario.
+   * *Defecto:* En `<a href="./notebooks/3_AB_Test_Analysis_v2.ipynb">3_AB_Test_Analysis_v2.ipynb</a>` la sección existía formalmente pero carecía de interpretación analítica, dejando una sección ciega sobre si el éxito inicial era transitorio.
+   * *Solución:* En `<a href="./4_Proyecto_Final_AB_Test.ipynb">4_Proyecto_Final_AB_Test.ipynb</a>` se calculó la serie diaria de la tasa de conversión. El comportamiento de la Página B demostró ser superior y estable día a día durante todo el periodo, descartando anomalías por curiosidad transitoria del usuario.
 3. **Control Clínico de Outliers mediante Rango Intercuartílico (IQR):**
    * *Defecto:* Riesgo latente de inflación de medias debido a compras de usuarios anómalos aislados.
    * *Solución:* Se aislaron los outliers de gasto (71 en la variante A y 89 en la variante B). Al recalcular y verificar que las medias sin outliers mantenían la misma brecha estructural, se validó la robustez de los resultados comerciales en el archivo de producción final.
@@ -49,14 +49,14 @@ Para asegurar la reproducibilidad y la transparencia institucional, se documenta
 
 Para demostrar visualmente la madurez analítica del proyecto en este repositorio, se estructuró la evolución gráfica en tres ejes fundamentales:
 
-### 1. Evolución de la Distribución de Gasto (`img/boxplot_gasto_evolucion.png`)
-* **Notebooks anteriores:** En `1_Github_AB_Test_Analysis_Final.ipynb` y `2_AB_Test_Analysis_mejorado.ipynb`, los boxplots eran rudimentarios, carecían de etiquetas claras y generaban advertencias `FutureWarning` constantes debido a parámetros obsoletos en la librería Seaborn.
-* **Notebook Final:** En `4_Proyecto_Final_AB_Test.ipynb`, se implementó una vista comparativa limpia usando `hue='landing'`, removiendo advertencias y añadiendo marcas explícitas de la media aritmética junto con el aislamiento estadístico de los outliers calculados por IQR.
+### 1. Evolución de la Distribución de Gasto (`images/boxplot_gasto_evolucion.png`)
+* **Notebooks anteriores:** En `<a href="./notebooks/1_Github_AB_Test_Analysis_Final.ipynb">1_Github_AB_Test_Analysis_Final.ipynb</a>` y `<a href="./notebooks/2_AB_Test_Analysis_mejorado.ipynb">2_AB_Test_Analysis_mejorado.ipynb</a>`, los boxplots eran rudimentarios, carecían de etiquetas claras y generaban advertencias `FutureWarning` constantes debido a parámetros obsoletos en la librería Seaborn.
+* **Notebook Final:** En `<a href="./4_Proyecto_Final_AB_Test.ipynb">4_Proyecto_Final_AB_Test.ipynb</a>`, se implementó una vista comparativa limpia usando `hue='landing'`, removiendo advertencias y añadiendo marcas explícitas de la media aritmética junto con el aislamiento estadístico de los outliers calculados por IQR.
 
-### 2. Monitoreo y Control del Sesgo (`img/srm_check_comparison.png`)
+### 2. Monitoreo y Control del Sesgo (`images/srm_check_comparison.png`)
 * Pasó de ser un conteo ciego de filas a un gráfico de barras balanceado que contrasta las frecuencias observadas vs las teóricas esperadas, desplegando en el título el estadístico de la prueba de Chi-cuadrado ($p = 0.8572$) para evidenciar un entorno experimental perfectamente controlado.
 
-### 3. Visualización del Impacto Financiero Real (`img/rpv_impact_metric.png`)
+### 3. Visualización del Impacto Financiero Real (`images/rpv_impact_metric.png`)
 * Esta gráfica se introdujo exclusivamente en el notebook final de producción para resolver la paradoja del Tamaño de Efecto Pequeño ($d = 0.24$). Al plasmar de forma ejecutiva cómo el Revenue Per Visitor se eleva un **+42.8%**, se simplifica la interpretación de la estadística avanzada en métricas de dinero real para la mesa directiva.
 
 ---
@@ -87,7 +87,6 @@ Para garantizar que los resultados no fueran producto del azar, se aplicaron pru
 * **Librerías de Análisis:** Pandas, Numpy, Scipy.stats, Statsmodels
 * **Visualización:** Matplotlib, Seaborn
 
----
 ---
 
 ## 📂 Estructura del Repositorio
