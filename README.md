@@ -77,6 +77,33 @@ Los resultados analíticos parciales han sido consolidados y guardados automáti
 * **Lenguaje:** Python 3.10+
 * **Librerías de Análisis:** Pandas, Numpy, Scipy.stats, Statsmodels
 * **Visualización:** Matplotlib, Seaborn
+---
+
+## 📂 Estructura del Repositorio
+
+```text
+├── 📂 .github/workflows/           # Configuración de Integración Continua (CI)
+├── 📂 archive/                      # Historial de iteraciones del proyecto (Linaje)
+│   ├── 📓 1_Github_AB_Test_Analysis_Final.ipynb  # Primera versión funcional básica
+│   ├── 📓 2_AB_Test_Analysis_mejorado.ipynb      # Intento de mejora con error de índice
+│   └── 📓 3_AB_Test_Analysis_v2.ipynb            # Incorporación de pruebas robustas
+├── 📂 data/                         # Almacenamiento de sets de datos
+│   └── 📄 landing_experiment.csv    # Datos físicos del experimento A/B (40,000 registros)
+├── 📂 images/                       # Activos visuales y gráficos exportados para el README
+│   ├── 🖼️ boxplot_gasto_evolucion.png  # Comparativa visual de distribución (V1 vs V4)
+│   ├── 🖼️ conversion_by_traffic.png    # Eficiencia por canales de adquisición
+│   ├── 🖼️ executive_dashboard.png     # Panel consolidado para C-Level
+│   └── 🖼️ user_type_interaction.png   # Interacción universal del tipo de usuario
+├── 📂 src/                          # Scripts de producción y utilidades auxiliares
+│   └── 📄 utils.py                 # Funciones estadísticas modulares
+├── 📄 .gitignore                    # Exclusión de entornos virtuales y cachés (.ipynb_checkpoints)
+├── 📄 4_Proyecto_Final_AB_Test.ipynb # [Entregable de Producción] Versión óptima final limpia
+├── 📄 LICENSE                       # Licencia de uso del código
+├── 📄 README.md                     # Documentación principal del repositorio (Este archivo)
+└── 📄 S9 Version_Student_Proyecto_Landing_Experiment.ipynb # Plantilla académica original vacía
+```
+
+
 
 ---
 ## Autor
