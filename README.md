@@ -1,7 +1,3 @@
-# 🚀 Análisis de Experimento A/B: Optimización y Gobierno de Landing Page
-
-Este repositorio contiene un análisis exhaustivo y la evolución metodológica de un **experimento A/B** diseñado para evaluar la efectividad de una nueva versión de landing page (Página B) frente a la original (Página A). El objetivo principal fue determinar el impacto tanto en la **tasa de conversión** como en el **valor promedio de transacción (Ticket Promedio)**, unificando el rendimiento a través de la métrica reina: **Revenue Per Visitor (RPV)**.
-
 ## 📊 Resumen Ejecutivo (KPIs Maestros Consolidados)
 
 Tras analizar una muestra auditada de **40,000 usuarios**, los resultados indican que la **Página B es significativamente superior** en todas las métricas clave:
@@ -92,12 +88,13 @@ Para garantizar que los resultados no fueran producto del azar, se aplicaron pru
 * **Visualización:** Matplotlib, Seaborn
 
 ---
+---
 
 ## 📂 Estructura del Repositorio
 
 ```text
 ├── 📂 .github/workflows/           # Configuración de Integración Continua (CI)
-├── 📂 archive/                      # Historial de iteraciones del proyecto (Linaje)
+├── 📂 notebooks/                      # Historial de iteraciones del proyecto (Linaje)
 │   ├── 📓 1_Github_AB_Test_Analysis_Final.ipynb  # Primera versión funcional básica
 │   ├── 📓 2_AB_Test_Analysis_mejorado.ipynb      # Intento de mejora con error de índice
 │   └── 📓 3_AB_Test_Analysis_v2.ipynb            # Incorporación de pruebas robustas
