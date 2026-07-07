@@ -14,35 +14,64 @@ Tras analizar una muestra auditada de **40,000 usuarios**, los resultados indica
 
 Para asegurar la reproducibilidad y la transparencia institucional, se documenta la transición exacta entre los notebooks que integran el historial del repositorio:
 
-### 🔍 Tabla de Linaje de Código y Cambios Técnicos
+# Fijamos la semilla para que el dataset sea idéntico en cada ejecución
+np.random.seed(42)
+n_clientes = 2000
 
+id_orden = [f"ORD-{np.random.randint(10000, 99999)}" for _ in range(n_clientes)]
+edad     = np.random.randint(18, 90, size=n_clientes)
 
+# Saldo de cuenta simulado. La distribución normal puede producir negativos;
+# eso lo corregimos en la Fase 4 como un error de dominio, no como outlier estadístico
+balance  = np.random.normal(50000, 25000, size=n_clientes)
 
-| Bloque Analítico | `<a href="./S9%20Version_Student_Proyecto_Landing_Experiment.ipynb">S9_Version_Student_<br>Proyecto_Landing_<br>Experiment.ipynb</a>` | `<a href="./notebooks/1_Github_AB_Test_Analysis_Final.ipynb">1_Github_AB_Test_<br>Analysis_Final.ipynb</a>` | `<a href="./notebooks/2_AB_Test_Analysis_mejorado.ipynb">2_AB_Test_Analysis_<br>mejorado.ipynb</a>` | `<a href="./notebooks/3_AB_Test_Analysis_v2.ipynb">3_AB_Test_Analysis_<br>v2.ipynb</a>` | `<a href="./4_Proyecto_Final_AB_Test.ipynb">4_Proyecto_Final_<br>AB_Test.ipynb</a>` | Razón de la Refactorización y Mejora Obtenida |
+# p= controla qué probabilidad tiene cada opción al muestrear
+productos   = np.random.choice([1, 2, 3, 4], size=n_clientes, p=[0.4, 0.45, 0.1, 0.05])
+miembro_act = np.random.choice([0, 1],        size=n_clientes, p=[0.4, 0.6])
 
-| :--- | :---: | :---: | :---: | :---: | :---: | :--- |
+# Mezclamos formatos para simular entradas manuales inconsistentes
+tarjeta = np.random.choice(
+    ['SÍ', 'NO', 'si', 'no', '?', 'N/A'], size=n_clientes,
+    p=[0.5, 0.3, 0.1, 0.05, 0.03, 0.02]
+)
 
-| **Carga de Entorno** | Celda 1 | Celda 1<br>*(Librerías estándar)* | Celda 1<br>*(Sin cambios)* | Celda 1<br>*(Añade multipletests)* | Celda 2<br>*(Configuración estética global, supresión de alertas)* | Profesionaliza el entorno ocultando advertencias de sintaxis y fijando una paleta homogénea (`Set2`). |
+# Nombres de ciudad con errores de codificación y espacios extra
+ciudades_sucias = [
+    'Bogotá', 'Bogota', 'Bogot√±',
+    'Medellín', 'Medellin', 'Medell√edn',
+    'Ciudad de M√©xico', 'CDMX', 'Monterrey  '
+]
+ciudad     = np.random.choice(ciudades_sucias, size=n_clientes)
+fecha_alta = np.random.choice(
+    ["2024-10-15", "15/10/2024", "Oct 15, 2024", "2024/10/15"],
+    size=n_clientes
+)
 
-| **Control SRM (Muestra)** | No existente | No existente | Celda 4<br>*(Mapeo plano)* | Celda 4<br>*(Cálculo Chi² manual)* | Celda 5<br>*(Validación robusta p=0.8572)* | **Eliminación de sesgo:** Asegura matemáticamente que el ruteo de usuarios fue totalmente balanceado y limpio. |
+# La probabilidad de churn sube si el cliente es mayor de 55 o tiene un solo producto
+prob_churn = 0.1 + (edad > 55)*0.2 + (productos == 1)*0.15 - (miembro_act == 1)*0.15
+prob_churn = np.clip(prob_churn, 0.05, 0.95)
+churn      = np.random.binomial(1, prob_churn)
 
-| **Filtro de Contaminación** | No existente | No existente | No existente | Celda 5<br>*(Cruce de IDs)* | Celda 6<br>*(Reporte de duplicados = 0)* | **Garantía de Rigor:** Valida que ningún usuario haya sido expuesto a ambas variantes de manera simultánea. |
+df_sucio = pd.DataFrame({
+    'id_orden': id_orden, 'fecha_alta': fecha_alta, 'ciudad': ciudad,
+    'edad': edad, 'balance': balance, 'num_productos': productos,
+    'miembro_activo': miembro_act, 'tiene_tarjeta': tarjeta, 'churn': churn
+})
 
-| **Efecto Novedad** | No existente | No existente | No existente | Celda 6<br>*(Eje de tiempo vacío)* | Celdas 7-8<br>*(Serie diaria + Análisis de estabilidad)* | **Protección de Falsos Positivos:** Confirma que el éxito de B es estable y duradero, no una anomalía inicial. |
+# Inyectamos nulos. Cada .sample() tiene su propio random_state para que
+# el resultado no dependa del estado global del generador — si alguien agrega
+# código antes de estas líneas, el dataset no cambia
+df_sucio.loc[df_sucio.sample(frac=0.03, random_state=42).index, 'balance'] = np.nan
+df_sucio.loc[df_sucio.sample(frac=0.02, random_state=43).index, 'edad']    = np.nan
 
-| **Análisis de Gasto** | Vacío asignado | Celda 5<br>*(t-test estándar)* | Celda 6<br>*(t-test estándar)* | Celda 10-11<br>*(Levene + t-Welch + MWU)* | Celda 11-13<br>*(Añade Cohen's d = 0.2498)* | **Precisión Estadística:** Levene detectó varianzas distintas, obligando a cambiar a una robusta **t de Welch**. |
+# -9999.0 es la bandera que usan algunos sistemas cuando el campo no tiene valor
+df_sucio.loc[df_sucio.sample(frac=0.01, random_state=44).index, 'balance'] = -9999.0
 
-| **Control de Outliers** | No existente | No existente | No existente | Celda 12<br>*(Filtro estadístico IQR)* | Celda 14-15<br>*(Comparativa de medias con/sin atípicos)* | **Robustez del Negocio:** Demuestra que la mejora en gasto no se debe a compradores masivos anómalos aislados. |
+# Duplicamos 30 registros para simular registros repetidos
+duplicados = df_sucio.sample(n=30, random_state=42)
+df = pd.concat([df_sucio, duplicados], ignore_index=True)
 
-| **Métrica Reina (RPV)** | No existente | No existente | No existente | Celda 15<br>*(Cálculo simple)* | Celda 16-18<br>*(Resolución formal de la Paradoja)* | **Traducción Financiera:** Unifica conversión y ticket promedio para reflejar un aumento directo del **+42.8%** por visita. |
-
-| **Resolución del Error Crítico** | No existente | No existente | Celda 15<br>*(Detiene ejecución por `KeyError: 'device'`)* | Celda 18<br>*(Parchado rudimentario)* | Celdas 19-23<br>*(Mapeo dinámico de variables reales)* | **Estabilidad de Software:** Elimina referencias a columnas muertas inexistentes en el archivo físico del dataset. |
-
-| **Reducción de Ruido** | No existente | No existente | No existente | Celda 24<br>*(Agrega V de Cramér / Bonferroni)* | Celdas Eliminadas por Diseño | **Navaja de Ockham:** Remoción de sobre-ingeniería matemática que no aportaba valor a la toma de decisiones. |
-
-| **Dashboard Ejecutivo** | Celdas vacías | Gráficos dispersos sin anotaciones | Gráficos individuales con `FutureWarning` | Celdas de dibujo independientes | Celda 26<br>*(Exportación de panel unificado PNG)* | **Estándar de Production-Ready:** Consolida métricas clave en una única imagen lista para el C-Level. |  
-
-
+print(f"Dataset generado: {df.shape[0]} filas × {df.shape[1]} columnas")
 ---
 
 ### 🔍 Análisis de Defectos y Decisiones Clave
