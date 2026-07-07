@@ -14,66 +14,21 @@ Tras analizar una muestra auditada de **40,000 usuarios**, los resultados indica
 
 Para asegurar la reproducibilidad y la transparencia institucional, se documenta la transición exacta entre los notebooks que integran el historial del repositorio:
 
-# Fijamos la semilla para que el dataset sea idéntico en cada ejecución
-np.random.seed(42)
-n_clientes = 2000
+### 🔍 Tabla de Linaje de Código y Cambios Técnicos
 
-id_orden = [f"ORD-{np.random.randint(10000, 99999)}" for _ in range(n_clientes)]
-edad     = np.random.randint(18, 90, size=n_clientes)
-
-# Saldo de cuenta simulado. La distribución normal puede producir negativos;
-# eso lo corregimos en la Fase 4 como un error de dominio, no como outlier estadístico
-balance  = np.random.normal(50000, 25000, size=n_clientes)
-
-# p= controla qué probabilidad tiene cada opción al muestrear
-productos   = np.random.choice([1, 2, 3, 4], size=n_clientes, p=[0.4, 0.45, 0.1, 0.05])
-miembro_act = np.random.choice([0, 1],        size=n_clientes, p=[0.4, 0.6])
-
-# Mezclamos formatos para simular entradas manuales inconsistentes
-tarjeta = np.random.choice(
-    ['SÍ', 'NO', 'si', 'no', '?', 'N/A'], size=n_clientes,
-    p=[0.5, 0.3, 0.1, 0.05, 0.03, 0.02]
-)
-
-# Nombres de ciudad con errores de codificación y espacios extra
-ciudades_sucias = [
-    'Bogotá', 'Bogota', 'Bogot√±',
-    'Medellín', 'Medellin', 'Medell√edn',
-    'Ciudad de M√©xico', 'CDMX', 'Monterrey  '
-]
-ciudad     = np.random.choice(ciudades_sucias, size=n_clientes)
-fecha_alta = np.random.choice(
-    ["2024-10-15", "15/10/2024", "Oct 15, 2024", "2024/10/15"],
-    size=n_clientes
-)
-
-# La probabilidad de churn sube si el cliente es mayor de 55 o tiene un solo producto
-prob_churn = 0.1 + (edad > 55)*0.2 + (productos == 1)*0.15 - (miembro_act == 1)*0.15
-prob_churn = np.clip(prob_churn, 0.05, 0.95)
-churn      = np.random.binomial(1, prob_churn)
-
-df_sucio = pd.DataFrame({
-    'id_orden': id_orden, 'fecha_alta': fecha_alta, 'ciudad': ciudad,
-    'edad': edad, 'balance': balance, 'num_productos': productos,
-    'miembro_activo': miembro_act, 'tiene_tarjeta': tarjeta, 'churn': churn
-})
-
-# Inyectamos nulos. Cada .sample() tiene su propio random_state para que
-# el resultado no dependa del estado global del generador — si alguien agrega
-# código antes de estas líneas, el dataset no cambia
-df_sucio.loc[df_sucio.sample(frac=0.03, random_state=42).index, 'balance'] = np.nan
-df_sucio.loc[df_sucio.sample(frac=0.02, random_state=43).index, 'edad']    = np.nan
-
-# -9999.0 es la bandera que usan algunos sistemas cuando el campo no tiene valor
-df_sucio.loc[df_sucio.sample(frac=0.01, random_state=44).index, 'balance'] = -9999.0
-
-# Duplicamos 30 registros para simular registros repetidos
-duplicados = df_sucio.sample(n=30, random_state=42)
-df = pd.concat([df_sucio, duplicados], ignore_index=True)
-
-print(f"Dataset generado: {df.shape[0]} filas × {df.shape[1]} columnas")
+| Bloque Analítico | Versión / Notebook Evaluado | Ubicación y Estado en el Código | Razón de la Refactorización y Mejora Obtenida |
+| :--- | :--- | :--- | :--- |
+| **Carga de Entorno** | • S9_Version_Student_Proyecto...<br>• 1_Github_AB_Test_Analysis_Final<br>• 2_AB_Test_Analysis_mejorado<br>• 3_AB_Test_Analysis_v2<br>• 4_Proyecto_Final_AB_Test | Celda 1<br>Celda 1 *(Librerías estándar)*<br>Celda 1 *(Sin cambios)*<br>Celda 1 *(Añade multipletests)*<br>Celda 2 *(Configuración estética global, supresión de alertas)* | Profesionaliza el entorno ocultando advertencias de sintaxis y fijando una paleta homogénea (`Set2`). |
+| **Control SRM (Muestra)** | • S9_Version_Student_Proyecto...<br>• 1_Github_AB_Test_Analysis_Final<br>• 2_AB_Test_Analysis_mejorado<br>• 3_AB_Test_Analysis_v2<br>• 4_Proyecto_Final_AB_Test | No existente<br>No existente<br>Celda 4 *(Mapeo plano)*<br>Celda 4 *(Cálculo Chi² manual)*<br>Celda 5 *(Validación robusta p=0.8572)* | **Eliminación de sesgo:** Asegura matemáticamente que el ruteo de usuarios fue totalmente balanceado y limpio. |
+| **Filtro de Contaminación** | • S9_Version_Student_Proyecto...<br>• 1_Github_AB_Test_Analysis_Final<br>• 2_AB_Test_Analysis_mejorado<br>• 3_AB_Test_Analysis_v2<br>• 4_Proyecto_Final_AB_Test | No existente<br>No existente<br>No existente<br>Celda 5 *(Cruce de IDs)*<br>Celda 6 *(Reporte de duplicados = 0)* | **Garantía de Rigor:** Valida que ningún usuario haya sido expuesto a ambas variantes de manera simultánea. |
+| **Efecto Novedad** | • S9_Version_Student_Proyecto...<br>• 1_Github_AB_Test_Analysis_Final<br>• 2_AB_Test_Analysis_mejorado<br>• 3_AB_Test_Analysis_v2<br>• 4_Proyecto_Final_AB_Test | No existente<br>No existente<br>No existente<br>Celda 6 *(Eje de tiempo vacío)*<br>Celdas 7-8 *(Serie diaria + Análisis de estabilidad)* | **Protección de Falsos Positivos:** Confirma que el éxito de B es stable y duradero, no una anomalía inicial. |
+| **Análisis de Gasto** | • S9_Version_Student_Proyecto...<br>• 1_Github_AB_Test_Analysis_Final<br>• 2_AB_Test_Analysis_mejorado<br>• 3_AB_Test_Analysis_v2<br>• 4_Proyecto_Final_AB_Test | Vacío asignado<br>Celda 5 *(t-test estándar)*<br>Celda 6 *(t-test estándar)*<br>Celda 10-11 *(Levene + t-Welch + MWU)*<br>Celda 11-13 *(Añade Cohen's d = 0.2498)* | **Precisión Estadística:** Levene detectó varianzas distintas, obligando a cambiar a una robusta **t de Welch**. |
+| **Control de Outliers** | • S9_Version_Student_Proyecto...<br>• 1_Github_AB_Test_Analysis_Final<br>• 2_AB_Test_Analysis_mejorado<br>• 3_AB_Test_Analysis_v2<br>• 4_Proyecto_Final_AB_Test | No existente<br>No existente<br>No existente<br>Celda 12 *(Filtro estadístico IQR)*<br>Celda 14-15 *(Comparativa de medias con/sin atípicos)* | **Robustez del Negocio:** Demuestra que la mejora en gasto no se debe a compradores masivos anómalos aislados. |
+| **Métrica Reina (RPV)** | • S9_Version_Student_Proyecto...<br>• 1_Github_AB_Test_Analysis_Final<br>• 2_AB_Test_Analysis_mejorado<br>• 3_AB_Test_Analysis_v2<br>• 4_Proyecto_Final_AB_Test | No existente<br>No existente<br>No existente<br>Celda 15 *(Cálculo simple)*<br>Celda 16-18 *(Resolución formal de la Paradoja)* | **Traducción Financiera:** Unifica conversión y ticket promedio para reflejar un aumento directo del **+42.8%** por visita. |
+| **Resolución del Error Crítico** | • S9_Version_Student_Proyecto...<br>• 1_Github_AB_Test_Analysis_Final<br>• 2_AB_Test_Analysis_mejorado<br>• 3_AB_Test_Analysis_v2<br>• 4_Proyecto_Final_AB_Test | No existente<br>No existente<br>Celda 15 *(Detiene ejecución por `KeyError: 'device'`)*<br>Celda 18 *(Parchado rudimentario)*<br>Celdas 19-23 *(Mapeo dinámico de variables reales)* | **Estabilidad de Software:** Elimina referencias a columnas muertas inexistentes en el archivo físico del dataset. |
+| **Reducción de Ruido** | • S9_Version_Student_Proyecto...<br>• 1_Github_AB_Test_Analysis_Final<br>• 2_AB_Test_Analysis_mejorado<br>• 3_AB_Test_Analysis_v2<br>• 4_Proyecto_Final_AB_Test | No existente<br>No existente<br>No existente<br>Celda 24 *(Agrega V de Cramér / Bonferroni)*<br>Celdas Eliminadas por Diseño | **Navaja de Ockham:** Remoción de sobre-ingeniería matemática que no aportaba valor a la toma de decisiones. |
+| **Dashboard Ejecutivo** | • S9_Version_Student_Proyecto...<br>• 1_Github_AB_Test_Analysis_Final<br>• 2_AB_Test_Analysis_mejorado<br>• 3_AB_Test_Analysis_v2<br>• 4_Proyecto_Final_AB_Test | Celdas vacías<br>Gráficos dispersos sin anotaciones<br>Gráficos individuales con `FutureWarning`<br>Celdas de dibujo independientes<br>Celda 26 *(Exportación de panel unificado PNG)* | **Estándar de Production-Ready:** Consolida métricas clave en una única imagen lista para el C-Level. |
 ---
-
 ### 🔍 Análisis de Defectos y Decisiones Clave
 
 1. **Resolución del Error Crítico de Variables Inexistentes (`KeyError: 'device'`):**
