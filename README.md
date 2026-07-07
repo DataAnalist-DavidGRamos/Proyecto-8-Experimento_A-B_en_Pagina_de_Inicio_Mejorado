@@ -53,10 +53,12 @@ Para demostrar visualmente la madurez analítica del proyecto en este repositori
 * **Notebooks anteriores:** En [1_Github_AB_Test_Analysis_Final.ipynb](./notebooks/1_Github_AB_Test_Analysis_Final.ipynb) y [2_AB_Test_Analysis_mejorado.ipynb](./notebooks/2_AB_Test_Analysis_mejorado.ipynb), los boxplots eran rudimentarios, carecían de etiquetas claras y generaban advertencias `FutureWarning` constantes debido a parámetros obsoletos en la librería Seaborn.
 * **Notebook Final:** En [4_Proyecto_Final_AB_Test.ipynb](./4_Proyecto_Final_AB_Test.ipynb), se implementó una vista comparativa limpia usando `hue='landing'`, removiendo advertencias y añadiendo marcas explícitas de la media aritmética junto con el aislamiento estadístico de los outliers calculados por IQR.
 
-### 2. Monitoreo y Control del Sesgo (images/srm_check_comparison.png)
+### 2. Monitoreo y Control del Sesgo
+![Monitoreo y Control del Sesgo](images/srm_check_comparison.png)
 * Pasó de ser un conteo ciego de filas a un gráfico de barras balanceado que contrasta las frecuencias observadas vs las teóricas esperadas, desplegando en el título el estadístico de la prueba de Chi-cuadrado ($p = 0.8572$) para evidenciar un entorno experimental perfectamente controlado.
 
-### 3. Visualización del Impacto Financiero Real (images/rpv_impact_metric.png)
+### 3. Visualización del Impacto Financiero Real
+![Visualización del Impacto Financiero Real](images/rpv_impact_metric.png)
 * Esta gráfica se introdujo exclusivamente en el notebook final de producción para resolver la paradoja del Tamaño de Efecto Pequeño ($d = 0.24$). Al plasmar de forma ejecutiva cómo el Revenue Per Visitor se eleva un **+42.8%**, se simplifica la interpretación de la estadística avanzada en métricas de dinero real para la mesa directiva.
 
 ---
