@@ -11,7 +11,7 @@ Tras analizar una muestra auditada de **40,000 usuarios**, los resultados indica
 | Métrica | Página A (Control) | Página B (Variante) | Mejora (Lift) | Impacto Práctico |
 | :--- | :---: | :---: | :---: | :--- |
 | **Tasa de Conversión** | 12.57% | **15.96%** | **+26.92%** | Límites de IC 95% sin solapamiento ($p < 0.001$). |
-| **Gasto Promedio (Compradores)** | $61.09 | **$68.75** | **+12.54%** | Diferencia estadísticamente significativa ($p < 0.001$). |
+| **Gasto Promedio (Compradores)** | $61.09 | **$68.75** | **+12.54%** | Diferencia robusta ante Outliers. |
 | **Revenue Per Visitor (RPV)** | $7.68 | **$10.97** | **+42.83%** | **Métrica Reina de Impacto Financiero.** |
 
 ---
@@ -40,13 +40,13 @@ Para asegurar la reproducibilidad y la transparencia del análisis, se documenta
 ### 🔍 Análisis de Defectos y Decisiones Clave
 
 1. **Resolución del Error Crítico de Variables Inexistentes (`KeyError: 'device'`):**
-   * *Defecto:* El notebook `2_AB_Test_Analysis_mejorado.ipynb` heredaba bucles automáticos sobre variables como `['region', 'device', 'traffic_source', 'user_type']`. Al ejecutarlo, pandas detenía la compilación con un `KeyError` debido a que la columna `device` (está en español como `dispositivo` y no existe `device` como tal) provocaba fallos de sintaxis en el código del estudiante.
-   * *Solución:* En `4_Proyecto_Final_AB_Test.ipynb` se mapeó la estructura real del dataset, restringiendo quirúrgicamente el código a interactuar con las variables categóricas correctas: `traffic_source` y `user_type`.
+   * *Defecto:* El notebook `2_AB_Test_Analysis_mejorado.ipynb` heredaba bucles automáticos sobre variables categóricas. Al ejecutarlo, pandas detenía la compilación con un `KeyError` debido a que la columna `device` (está en español como `dispositivo` en el dataset físico) provocaba un fallo de ejecución.
+   * *Solución:* En `4_Proyecto_Final_AB_Test.ipynb` se mapeó la estructura real de variables categóricas, restringiendo el código a interactuar con las existentes: `traffic_source` y `user_type`.
 2. **Mitigación del "Efecto Novedad" mediante Análisis Temporal:**
-   * *Defecto:* En el notebook `3_AB_Test_Analysis_v2.ipynb` la sección temporal existía formalmente pero carecía de una conclusión de negocio explícita, dejando una brecha sobre si el éxito inicial era un fenómeno transitorio.
+   * *Defecto:* En el notebook `3_AB_Test_Analysis_v2.ipynb` el eje de tiempo se presentaba sin análisis narrativo, dejando una brecha sobre si el éxito inicial era un fenómeno transitorio.
    * *Solución:* En el notebook final se calculó la serie diaria de la tasa de conversión. El comportamiento de la Página B demostró ser superior y estable día a día durante todo el periodo (28 días del experimento), descartando anomalías por curiosidad transitoria del usuario.
 3. **Control de Outliers mediante Rango Intercuartílico (IQR):**
-   * *Defecto:* Riesgo latente de inflación artificial de medias de gasto por compras de usuarios anómalos o "ballenas" aisladas.
+   * *Defecto:* Riesgo de inflación artificial de medias de gasto por compras de usuarios atípicos aislados.
    * *Solución:* Se aislaron los outliers de gasto (71 en la variante A y 89 en la variante B). Al recalcular y verificar que las medias sin outliers mantenían la misma brecha estructural (A: \$58.27 | B: \$65.88), se validó la robustez de los resultados comerciales.
 
 ---
@@ -57,16 +57,22 @@ Para demostrar visualmente la madurez analítica del proyecto en este repositori
 
 ### 1. Evolución de la Distribución de Gasto
 ![Evolución de la Distribución de Gasto](graficos/boxplot_gasto_evolucion.png)
-* **Notebooks anteriores:** En `1_Github_AB_Test_Analysis_Final.ipynb` y `2_AB_Test_Analysis_mejorado.ipynb`, los boxplots eran rudimentarios, carecían de marcas numéricas de media y generaban advertencias `FutureWarning` debido a parámetros obsoletos en la librería Seaborn.
+* **Notebooks anteriores:** En `1_Github_AB_Test_Analysis_Final.ipynb` y `2_AB_Test_Analysis_mejorado.ipynb`, los boxplots eran rudimentarios, carecían de etiquetas claras y generaban advertencias `FutureWarning` debido a parámetros obsoletos en Seaborn.
 * **Notebook Final:** Se implementó una vista comparativa limpia usando `hue='landing'`, removiendo advertencias y añadiendo marcas explícitas de la media aritmética junto con el aislamiento de outliers calculado por IQR.
 
-### 2. Monitoreo y Control del Sesgo de Segmento
-![Monitoreo y Control del Sesgo](graficos/user_type_interaction.png)
-* Pasó de ser un conteo ciego de filas a un gráfico de barras balanceado que contrasta las tasas de conversión por tipo de usuario (Nuevo vs Recurrente). Despliega en el título el p-valor de la prueba de Chi-cuadrado ($p = 0.7966$) para evidenciar que no existe interacción o sesgo estructural por tipo de usuario.
+### 2. Tasa de Conversión por Canal de Tráfico
+![Tasa de Conversión por Canal de Tráfico](graficos/conversion_by_traffic.png)
+* **Notebooks anteriores:** Gráficos de barras apiladas de volumen absoluto que dificultaban comparar la eficiencia relativa entre canales de distinto volumen.
+* **Notebook Final:** Gráfico de barras de tasa de conversión con etiquetas porcentuales sobre las barras y un mapa de calor que resalta la eficiencia de `Email` y `Ads`. El título muestra el Chi-cuadrado global que valida que los canales de tráfico no presentan sesgos de asignación en los grupos ($p = 0.3119$).
 
-### 3. Tasa de Conversión por Canal de Tráfico
-![Visualización del Impacto por Canal](graficos/conversion_by_traffic.png)
-* Esta gráfica muestra las tasas de conversión segmentadas por canal. En el título se destaca la prueba de Chi-cuadrado global que valida que los canales de tráfico no presentan sesgos de asignación en los grupos ($p = 0.3119$), mientras que se documenta cómo los canales de `Email` y `Ads` responden con mayor lift al cambio de diseño.
+### 3. Tasa de Conversión por Tipo de Usuario
+![Tasa de Conversión por Tipo de Usuario](graficos/user_type_interaction.png)
+* **Notebooks anteriores:** Gráficos de barra acumulada que carecían de anotaciones de tasas porcentuales reales.
+* **Notebook Final:** Contraste dinámico de conversión por variante y segmento de usuario (Nuevo vs Recurrente). Muestra un p-valor de la prueba de Chi-cuadrado ($p = 0.7966$), lo que demuestra que la Página B es superior universalmente en ambos grupos y no requiere personalización técnica.
+
+### 4. Dashboard Ejecutivo Consolidado (C-Level Ready)
+![Dashboard Ejecutivo Consolidado](graficos/executive_dashboard.png)
+* **Notebook Final:** Generación del panel integral executive-ready de 6 gráficos clave que consolida el SRM Check, la Tasa de Conversión con IC 95%, la Estabilidad temporal diaria, el Ticket promedio de compradores, el RPV (Revenue Per Visitor) y el Heatmap de conversión. Listo para su uso directo en presentaciones comerciales.
 
 ---
 
