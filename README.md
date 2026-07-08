@@ -1,4 +1,4 @@
-# 📊 Experimento A/B: Optimización de Página de Inicio (Landing Page)
+# 📊 Experimento A/B:  [Corrección del P_8, (https://github.com/DataAnalist-DavidGRamos/Proyecto-8-Experimento_A-B_en_Pagina_de_Inicio-)]
 
 El objetivo de este proyecto es evaluar un experimento A/B realizado sobre la página de inicio (landing page) de la compañía para determinar si la nueva **Página B** supera a la de control (**Página A**). El análisis abarca la validación de balanceo muestral (SRM), el impacto en la tasa de conversión, el análisis del ticket de gasto promedio por comprador y la métrica de negocio unificada: **Revenue Per Visitor (RPV)**.
 
