@@ -23,7 +23,7 @@ Para asegurar la reproducibilidad y la transparencia del análisis, se documenta
 ### 🔍 Tabla de Linaje de Código y Cambios Técnicos
 
 | Bloque Analítico | [S9_Version_Student.ipynb](./S9%20Version_Student_Proyecto_Landing_Experiment.ipynb) | [1_Github_AB_Test_Analysis_Final.ipynb](./1_Github_AB_Test_Analysis_Final.ipynb) | [2_AB_Test_Analysis_mejorado.ipynb](./2_AB_Test_Analysis_mejorado.ipynb) | [3_AB_Test_Analysis_v2.ipynb](./3_AB_Test_Analysis_v2.ipynb) | [4_Proyecto_Final_AB_Test.ipynb](./4_Proyecto_Final_AB_Test.ipynb) | Razón de la Refactorización y Mejora Obtenida |
-| :--- | :---: | :---: | :---: | :---: | :---: | :----------------------------------------------------------------------------------------------------------------------- |
+| :--- | :---: | :---: | :---: | :---: | :---: | :-------------------------------------------------------------------------------------------------- |
 | **Carga de Entorno** | Celda 1 | Celda 1<br>*(Librerías estándar)* | Celda 1<br>*(Sin cambios)* | Celda 1<br>*(Añade multipletests)* | Celda 3<br>*(Configuración estética global, supresión de alertas)* | Profesionaliza el entorno ocultando advertencias de sintaxis y fijando una paleta homogénea (`Set2`). |
 | **Control SRM (Muestra)** | No existente | No existente | Celda 4<br>*(Mapeo plano)* | Celda 4<br>*(Cálculo Chi² manual)* | Celda 8<br>*(Validación robusta p=0.8572)* | **Eliminación de sesgo:** Asegura matemáticamente que el ruteo de usuarios fue totalmente balanceado y limpio. |
 | **Filtro de Contaminación** | No existente | No existente | No existente | Celda 5<br>*(Cruce de IDs)* | Celda 8<br>*(Reporte de duplicados = 0)* | **Garantía de Rigor:** Valida que ningún usuario haya sido expuesto a ambas variantes de manera simultánea. |
