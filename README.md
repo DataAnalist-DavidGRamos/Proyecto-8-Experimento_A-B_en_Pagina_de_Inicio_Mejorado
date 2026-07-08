@@ -120,8 +120,9 @@ Para garantizar que los resultados no fueran producto del azar, se aplicaron pru
 ├── 📄 4_Proyecto_Final_AB_Test.ipynb # [Entregable de Producción] Versión óptima final limpia
 ├── 📄 README.md                     # Documentación principal del repositorio (Este archivo)
 └── 📄 S9 Version_Student_Proyecto_Landing_Experiment.ipynb # Plantilla académica original vacía
-
+```
 ---
+
 ### AUTOR:
 David Germán Ramos Rodríguez
 [LinkedIn](https://www.linkedin.com/in/david-g-ramos/) | 
