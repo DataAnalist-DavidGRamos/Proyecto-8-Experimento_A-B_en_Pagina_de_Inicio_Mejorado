@@ -56,22 +56,22 @@ Para asegurar la reproducibilidad y la transparencia del análisis, se documenta
 Para demostrar visualmente la madurez analítica del proyecto en este repositorio, se estructuró la evolución gráfica en tres ejes fundamentales:
 
 ### 1. Evolución de la Distribución de Gasto
-![Evolución de la Distribución de Gasto](graficos/boxplot_gasto_evolucion.png)
+![Evolución de la Distribución de Gasto](images/boxplot_gasto_evolucion.png)
 * **Notebooks anteriores:** En `1_Github_AB_Test_Analysis_Final.ipynb` y `2_AB_Test_Analysis_mejorado.ipynb`, los boxplots eran rudimentarios, carecían de etiquetas claras y generaban advertencias `FutureWarning` debido a parámetros obsoletos en Seaborn.
 * **Notebook Final:** Se implementó una vista comparativa limpia usando `hue='landing'`, removiendo advertencias y añadiendo marcas explícitas de la media aritmética junto con el aislamiento de outliers calculado por IQR.
 
 ### 2. Tasa de Conversión por Canal de Tráfico
-![Tasa de Conversión por Canal de Tráfico](graficos/conversion_by_traffic.png)
+![Tasa de Conversión por Canal de Tráfico](images/conversion_by_traffic.png)
 * **Notebooks anteriores:** Gráficos de barras apiladas de volumen absoluto que dificultaban comparar la eficiencia relativa entre canales de distinto volumen.
 * **Notebook Final:** Gráfico de barras de tasa de conversión con etiquetas porcentuales sobre las barras y un mapa de calor que resalta la eficiencia de `Email` y `Ads`. El título muestra el Chi-cuadrado global que valida que los canales de tráfico no presentan sesgos de asignación en los grupos ($p = 0.3119$).
 
 ### 3. Tasa de Conversión por Tipo de Usuario
-![Tasa de Conversión por Tipo de Usuario](graficos/user_type_interaction.png)
+![Tasa de Conversión por Tipo de Usuario](images/user_type_interaction.png)
 * **Notebooks anteriores:** Gráficos de barra acumulada que carecían de anotaciones de tasas porcentuales reales.
 * **Notebook Final:** Contraste dinámico de conversión por variante y segmento de usuario (Nuevo vs Recurrente). Muestra un p-valor de la prueba de Chi-cuadrado ($p = 0.7966$), lo que demuestra que la Página B es superior universalmente en ambos grupos y no requiere personalización técnica.
 
 ### 4. Dashboard Ejecutivo Consolidado (C-Level Ready)
-![Dashboard Ejecutivo Consolidado](graficos/executive_dashboard.png)
+![Dashboard Ejecutivo Consolidado](images/executive_dashboard.png)
 * **Notebook Final:** Generación del panel integral executive-ready de 6 gráficos clave que consolida el SRM Check, la Tasa de Conversión con IC 95%, la Estabilidad temporal diaria, el Ticket promedio de compradores, el RPV (Revenue Per Visitor) y el Heatmap de conversión. Listo para su uso directo en presentaciones comerciales.
 
 ---
