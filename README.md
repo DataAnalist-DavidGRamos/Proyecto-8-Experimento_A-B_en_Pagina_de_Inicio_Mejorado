@@ -107,6 +107,8 @@ Para garantizar que los resultados no fueran producto del azar, se aplicaron pru
 ## 📂 Estructura del Repositorio
 
 ```text
+├── 📂 notebooks/
+│   └── 📄 landing_experiment.csv      # Datos físicos del experimento A/B (40,000 registros)        
 ├── 📂 notebooks/                      # Historial de iteraciones del proyecto (Linaje)
 │   ├── 📓 1_Github_AB_Test_Analysis_Final.ipynb  # Primera versión funcional básica
 │   ├── 📓 2_AB_Test_Analysis_mejorado.ipynb      # Intento de mejora con error de índice
@@ -116,7 +118,7 @@ Para garantizar que los resultados no fueran producto del azar, se aplicaron pru
 │   ├── 🖼️ conversion_by_traffic.png    # Eficiencia y tasas por canales de adquisición
 │   ├── 🖼️ executive_dashboard.png     # Panel consolidado para C-Level
 │   └── 🖼️ user_type_interaction.png   # Interacción universal del tipo de usuario
-├── 📄 landing_experiment.csv        # Datos físicos del experimento A/B (40,000 registros)
+
 ├── 📄 4_Proyecto_Final_AB_Test.ipynb # [Entregable de Producción] Versión óptima final limpia
 ├── 📄 README.md                     # Documentación principal del repositorio (Este archivo)
 └── 📄 S9 Version_Student_Proyecto_Landing_Experiment.ipynb # Plantilla académica original vacía
