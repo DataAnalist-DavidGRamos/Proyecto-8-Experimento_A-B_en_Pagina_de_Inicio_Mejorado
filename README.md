@@ -22,18 +22,120 @@ Para asegurar la reproducibilidad y la transparencia del análisis, se documenta
 
 ### 🔍 Tabla de Linaje de Código y Cambios Técnicos
 
-| Bloque Analítico | [S9_Version_Student.ipynb](./S9%20Version_Student_Proyecto_Landing_Experiment.ipynb) | [1_Github_AB_Test_Analysis_Final.ipynb](./1_Github_AB_Test_Analysis_Final.ipynb) | [2_AB_Test_Analysis_mejorado.ipynb](./2_AB_Test_Analysis_mejorado.ipynb) | [3_AB_Test_Analysis_v2.ipynb](./3_AB_Test_Analysis_v2.ipynb) | [4_Proyecto_Final_AB_Test.ipynb](./4_Proyecto_Final_AB_Test.ipynb) | Razón de la Refactorización y Mejora Obtenida |
-| :--- | :---: | :---: | :---: | :---: | :---: | :----------------------------------------------------------------------------------------------------------------------- |
-| **Carga de Entorno** | Celda 1 | Celda 1<br>*(Librerías estándar)* | Celda 1<br>*(Sin cambios)* | Celda 1<br>*(Añade multipletests)* | Celda 3<br>*(Configuración estética global, supresión de alertas)* | Profesionaliza el entorno ocultando advertencias de sintaxis y fijando una paleta homogénea (`Set2`). |
-| **Control SRM (Muestra)** | No existente | No existente | Celda 4<br>*(Mapeo plano)* | Celda 4<br>*(Cálculo Chi² manual)* | Celda 8<br>*(Validación robusta p=0.8572)* | **Eliminación de sesgo:** Asegura matemáticamente que el ruteo de usuarios fue totalmente balanceado y limpio. |
-| **Filtro de Contaminación** | No existente | No existente | No existente | Celda 5<br>*(Cruce de IDs)* | Celda 8<br>*(Reporte de duplicados = 0)* | **Garantía de Rigor:** Valida que ningún usuario haya sido expuesto a ambas variantes de manera simultánea. |
-| **Efecto Novedad** | No existente | No existente | No existente | Celda 6<br>*(Eje de tiempo vacío)* | Celdas 15-17<br>*(Serie diaria + Análisis de estabilidad)* | **Protección de Falsos Positivos:** Confirma que el éxito de B es estable y duradero, no una anomalía inicial. |
-| **Análisis de Gasto** | Vacío asignado | Celda 5<br>*(t-test estándar)* | Celda 6<br>*(t-test estándar)* | Celda 10-11<br>*(Levene + t-Welch + MWU)* | Celda 23-28<br>*(Añade Cohen's d = 0.2498)* | **Precisión Estadística:** Levene detectó varianzas distintas, obligando a cambiar a una robusta **t de Welch**. |
-| **Control de Outliers** | No existente | No existente | No existente | Celda 12<br>*(Filtro estadístico IQR)* | Celda 25-29<br>*(Comparativa de medias con/sin atípicos)* | **Robustez del Negocio:** Demuestra que la mejora en gasto no se debe a compradores masivos anómalos aislados. |
-| **Métrica Reina (RPV)** | No existente | No existente | No existente | Celda 15<br>*(Cálculo simple)* | Celda 35-37<br>*(Resolución formal de la Paradoja)* | **Traducción Financiera:** Unifica conversión y ticket promedio para reflejar un aumento directo del **+42.83%** por visita. |
-| **Resolución del Error Crítico** | No existente | No existente | Celda 15<br>*(Detiene ejecución por `KeyError: 'device'`)* | Celda 18<br>*(Parchado rudimentario)* | Celdas 21-22<br>*(Mapeo dinámico de variables reales)* | **Estabilidad de Software:** Elimina referencias a columnas muertas inexistentes (`device`) en el archivo físico del dataset. |
-| **Reducción de Ruido** | No existente | No existente | No existente | Celda 24<br>*(Agrega V de Cramér / Bonferroni)* | Celdas Eliminadas por Diseño | **Navaja de Ockham:** Remoción de sobre-ingeniería matemática que no aportaba valor a la toma de decisiones. |
-| **Dashboard Ejecutivo** | Celdas vacías | Gráficos dispersos sin anotaciones | Gráficos individuales con `FutureWarning` | Celdas de dibujo independientes | Celda 46<br>*(Exportación de panel unificado PNG)* | **Estándar de Production-Ready:** Consolida métricas clave en una única imagen lista para el C-Level. |
+<table>
+  <colgroup>
+    <col style="width: 12%;">
+    <col style="width: 10%;">
+    <col style="width: 10%;">
+    <col style="width: 10%;">
+    <col style="width: 10%;">
+    <col style="width: 10%;">
+    <col style="width: 38%;"> <!-- Columna de texto extenso -->
+  </colgroup>
+  <thead>
+    <tr>
+      <th style="text-align: left;">Bloque Analítico</th>
+      <th style="text-align: center;"><a href="./S9%20Version_Student_Proyecto_Landing_Experiment.ipynb">S9_Version_Student.ipynb</a></th>
+      <th style="text-align: center;"><a href="./1_Github_AB_Test_Analysis_Final.ipynb">1_Github_AB_Test_Analysis_Final.ipynb</a></th>
+      <th style="text-align: center;"><a href="./2_AB_Test_Analysis_mejorado.ipynb">2_AB_Test_Analysis_mejorado.ipynb</a></th>
+      <th style="text-align: center;"><a href="./3_AB_Test_Analysis_v2.ipynb">3_AB_Test_Analysis_v2.ipynb</a></th>
+      <th style="text-align: center;"><a href="./4_Proyecto_Final_AB_Test.ipynb">4_Proyecto_Final_AB_Test.ipynb</a></th>
+      <th style="text-align: left;">Razón de la Refactorización y Mejora Obtenida</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left;"><strong>Carga de Entorno</strong></td>
+      <td style="text-align: center;">Celda 1</td>
+      <td style="text-align: center;">Celda 1<br><em>(Librerías estándar)</em></td>
+      <td style="text-align: center;">Celda 1<br><em>(Sin cambios)</em></td>
+      <td style="text-align: center;">Celda 1<br><em>(Añade multipletests)</em></td>
+      <td style="text-align: center;">Celda 3<br><em>(Configuración estética global, supresión de alertas)</em></td>
+      <td style="text-align: left;">Profesionaliza el entorno ocultando advertencias de sintaxis y fijando una paleta homogénea (<code>Set2</code>).</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>Control SRM (Muestra)</strong></td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">Celda 4<br><em>(Mapeo plano)</em></td>
+      <td style="text-align: center;">Celda 4<br><em>(Cálculo Chi² manual)</em></td>
+      <td style="text-align: center;">Celda 8<br><em>(Validación robusta p=0.8572)</em></td>
+      <td style="text-align: left;"><strong>Eliminación de sesgo:</strong> Asegura matemáticamente que el ruteo de usuarios fue totalmente balanceado y limpio.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>Filtro de Contaminación</strong></td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">Celda 5<br><em>(Cruce de IDs)</em></td>
+      <td style="text-align: center;">Celda 8<br><em>(Reporte de duplicados = 0)</em></td>
+      <td style="text-align: left;"><strong>Garantía de Rigor:</strong> Valida que ningún usuario haya sido expuesto a ambas variantes de manera simultánea.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>Efecto Novedad</strong></td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">Celda 6<br><em>(Eje de tiempo vacío)</em></td>
+      <td style="text-align: center;">Celdas 15-17<br><em>(Serie diaria + Análisis de estabilidad)</em></td>
+      <td style="text-align: left;"><strong>Protección de Falsos Positivos:</strong> Confirma que el éxito de B es estable y duradero, no una anomalía inicial.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>Análisis de Gasto</strong></td>
+      <td style="text-align: center;">Vacío asignado</td>
+      <td style="text-align: center;">Celda 5<br><em>(t-test estándar)</em></td>
+      <td style="text-align: center;">Celda 6<br><em>(t-test estándar)</em></td>
+      <td style="text-align: center;">Celda 10-11<br><em>(Levene + t-Welch + MWU)</em></td>
+      <td style="text-align: center;">Celda 23-28<br><em>(Añade Cohen's d = 0.2498)</em></td>
+      <td style="text-align: left;"><strong>Precisión Estadística:</strong> Levene detectó varianzas distintas, obligando a cambiar a una robusta <strong>t de Welch</strong>.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>Control de Outliers</strong></td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">Celda 12<br><em>(Filtro estadístico IQR)</em></td>
+      <td style="text-align: center;">Celda 25-29<br><em>(Comparativa de medias con/sin atípicos)</em></td>
+      <td style="text-align: left;"><strong>Robustez del Negocio:</strong> Demuestra que la mejora en gasto no se debe a compradores masivos anómalos aislados.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>Métrica Reina (RPV)</strong></td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">Celda 15<br><em>(Cálculo simple)</em></td>
+      <td style="text-align: center;">Celda 35-37<br><em>(Resolución formal de la Paradoja)</em></td>
+      <td style="text-align: left;"><strong>Traducción Financiera:</strong> Unifica conversión y ticket promedio para reflejar un aumento directo del <strong>+42.83%</strong> por visita.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>Resolución del Error Crítico</strong></td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">Celda 15<br><em>(Detiene ejecución por <code>KeyError: 'device'</code>)</em></td>
+      <td style="text-align: center;">Celda 18<br><em>(Parchado rudimentario)</em></td>
+      <td style="text-align: center;">Celdas 21-22<br><em>(Mapeo dinámico de variables reales)</em></td>
+      <td style="text-align: left;"><strong>Estabilidad de Software:</strong> Elimina referencias a columnas muertas inexistentes (<code>device</code>) en el archivo físico del dataset.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>Reducción de Ruido</strong></td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">No existente</td>
+      <td style="text-align: center;">Celda 24<br><em>(Agrega V de Cramér / Bonferroni)</em></td>
+      <td style="text-align: center;">Celdas Eliminadas por Diseño</td>
+      <td style="text-align: left;"><strong>Navaja de Ockham:</strong> Remoción de sobre-ingeniería matemática que no aportaba valor a la toma de decisiones.</td>
+    </tr>
+    <tr>
+      <td style="text-align: left;"><strong>Dashboard Ejecutivo</strong></td>
+      <td style="text-align: center;">Celdas vacías</td>
+      <td style="text-align: center;">Gráficos dispersos sin anotaciones</td>
+      <td style="text-align: center;">Gráficos individuales con <code>FutureWarning</code></td>
+      <td style="text-align: center;">Celdas de dibujo independientes</td>
+      <td style="text-align: center;">Celda 46<br><em>(Exportación de panel unificado PNG)</em></td>
+      <td style="text-align: left;"><strong>Estándar de Production-Ready:</strong> Consolida métricas clave en una única imagen lista para el C-Level.</td>
+    </tr>
+  </tbody>
+</table>
 
 ---
 
