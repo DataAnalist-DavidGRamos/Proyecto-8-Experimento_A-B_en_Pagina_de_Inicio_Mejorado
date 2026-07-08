@@ -122,8 +122,7 @@ Para garantizar que los resultados no fueran producto del azar, se aplicaron pru
 └── 📄 S9 Version_Student_Proyecto_Landing_Experiment.ipynb # Plantilla académica original vacía
 
 ---
-## Autor
-
+### AUTOR:
 David Germán Ramos Rodríguez
-
-[LinkedIn](https://www.linkedin.com/in/david-g-ramos/) | [Portfolio](https://dataanalist-davidgramos.git
+[LinkedIn](https://www.linkedin.com/in/david-g-ramos/) | 
+[Sitio Web](https://dataanalist-davidgramos.github.io/mi-sitio-web/)
