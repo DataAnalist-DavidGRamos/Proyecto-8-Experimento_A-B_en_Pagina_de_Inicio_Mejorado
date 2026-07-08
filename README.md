@@ -1,106 +1,104 @@
-# 📊 Corrección del : [Proyecto-8-Experimento_A-B_en_Pagina_de_Inicio-](https://github.com/DataAnalist-DavidGRamos/Proyecto-8-Experimento_A-B_en_Pagina_de_Inicio-)
+# 📊 Análisis y Corrección del Experimento: [A/B Test en la Página de Inicio](https://github.com/DataAnalist-DavidGRamos/Proyecto-8-Experimento_A-B_en_Pagina_de_Inicio-)
 
-El objetivo de este proyecto es aplicar una corrección significativa con análisis estadistico y el reigor de una auditoria al análisis de datos; evaluar un experimento A/B realizado sobre la página de inicio (landing page) de la compañía para determinar si la nueva **Página B** supera a la de control (**Página A**). El análisis abarca la validación de balanceo muestral (SRM), el impacto en la tasa de conversión, el análisis del ticket de gasto promedio por comprador y la métrica de negocio unificada: **Revenue Per Visitor (RPV)**.
+El objetivo de este proyecto fue hacer una revisión a fondo y limpiar el análisis de un experimento que se hizo en nuestra página de inicio. Queríamos evaluar si la nueva propuesta de diseño (**Página B**) realmente funciona mejor que la versión actual (**Página A**). Para estar completamente seguros, revisamos que el flujo de usuarios estuviera bien repartido, medimos cuánta gente compró (conversión), cuánto dinero gastaron en promedio y, lo más importante, calculamos cuánto dinero extra nos dejó cada visita que entró al sitio (**Ingreso por Visitante o RPV**).
 
 ---
 
-## 📊 Resumen Ejecutivo (KPIs Maestros Consolidados)
+## 📊 Resumen para Tomar Decisiones (Resultados Clave)
 
-Tras analizar una muestra auditada de **40,000 usuarios**, los resultados indican que la **Página B es significativamente superior** en todas las métricas clave:
+Después de auditar la información de **40,000 usuarios**, los números son claros: **la Página B es la ganadora indiscutible** y superó a la versión anterior en todo:
 
-| Métrica | Página A (Control) | Página B (Variante) | Mejora (Lift) | Impacto Práctico |
+| Qué medimos | Página A (Diseño Actual) | Página B (Diseño Nuevo) | Qué tanto mejoró (Mejora) | Qué significa esto en la práctica |
 | :--- | :---: | :---: | :---: | :--- |
-| **Tasa de Conversión** | 12.57% | **15.96%** | **+26.92%** | Límites de IC 95% sin solapamiento ($p < 0.001$). |
-| **Gasto Promedio (Compradores)** | $61.09 | **$68.75** | **+12.54%** | Diferencia robusta ante Outliers. |
-| **Revenue Per Visitor (RPV)** | $7.68 | **$10.97** | **+42.83%** | **Métrica Reina de Impacto Financiero.** |
+| **Gente que compró (Conversión)** | 12.57% | **15.96%** | **+26.92%** | El aumento es real y no fue por casualidad o suerte. |
+| **Gasto Promedio por Cliente** | $61.09 | **$68.75** | **+12.54%** | Los clientes no solo compraron más, sino que gastaron más dinero. |
+| **Ganancia por cada Visita (RPV)** | $7.68 | **$10.97** | **+42.83%** | **La métrica más importante: nos dice el impacto real en dinero.** |
 
 ---
 
-## 🧬 Gobierno de Datos: Evolución del Repositorio y Auditoría de Celdas
+## 🧬 Organización del Trabajo: Evolución de los Archivos y Cambios
 
-Para asegurar la reproducibilidad y la transparencia del análisis, se documenta la transición exacta entre los notebooks que integran el historial del repositorio:
+Para que cualquiera pueda revisar cómo fuimos construyendo el proyecto paso a paso, aquí dejamos el orden y los cambios que se hicieron en cada uno de los archivos del repositorio:
 
 ### 🔍 Tabla de Linaje de Código y Cambios Técnicos
 
 | Bloque Analítico | [S9_Version_Student_<br>Proyecto_Landing_<br>Experiment.ipynb](./S9%20Version_Student_Proyecto_Landing_Experiment.ipynb) | [1_Github_AB_Test_<br>Analysis_Final.ipynb](./notebooks/1_Github_AB_Test_Analysis_Final.ipynb) | [2_AB_Test_Analysis_<br>mejorado.ipynb](./notebooks/2_AB_Test_Analysis_mejorado.ipynb) | [3_AB_Test_Analysis_<br>v2.ipynb](./notebooks/3_AB_Test_Analysis_v2.ipynb) | [4_Proyecto_Final_<br>AB_Test.ipynb](./4_Proyecto_Final_AB_Test.ipynb) | Razón de la Refactorización y Mejora Obtenida &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; |
 | :--- | :---: | :---: | :---: | :---: | :---: | :----------------------------------------------------------------------------------------------------------------------- |
-| **Carga de Entorno** | Celda 1 | Celda 1<br>*(Librerías estándar)* | Celda 1<br>*(Sin cambios)* | Celda 1<br>*(Añade multipletests)* | Celda 2<br>*(Configuración estética global, supresión de alertas)* | Profesionaliza el entorno ocultando advertencias de sintaxis y fijando una paleta homogénea (`Set2`). |
-| **Control SRM (Muestra)** | No existente | No existente | Celda 4<br>*(Mapeo plano)* | Celda 4<br>*(Cálculo Chi² manual)* | Celda 5<br>*(Validación robusta p=0.8572)* | **Eliminación de sesgo:** Asegura matemáticamente que el ruteo de usuarios fue totalmente balanceado y limpio. |
-| **Filtro de Contaminación** | No existente | No existente | No existente | Celda 5<br>*(Cruce de IDs)* | Celda 6<br>*(Reporte de duplicados = 0)* | **Garantía de Rigor:** Valida que ningún usuario haya sido expuesto a ambas variantes de manera simultánea. |
-| **Efecto Novedad** | No existente | No existente | No existente | Celda 6<br>*(Eje de tiempo vacío)* | Celdas 7-8<br>*(Serie diaria + Análisis de estabilidad)* | **Protección de Falsos Positivos:** Confirma que el éxito de B es estable y duradero, no una anomalía inicial. |
-| **Análisis de Gasto** | Vacío asignado | Celda 5<br>*(t-test estándar)* | Celda 6<br>*(t-test estándar)* | Celda 10-11<br>*(Levene + t-Welch + MWU)* | Celda 11-13<br>*(Añade Cohen's d = 0.2498)* | **Precisión Estadística:** Levene detectó varianzas distintas, obligando a cambiar a una robusta **t de Welch**. |
-| **Control de Outliers** | No existente | No existente | No existente | Celda 12<br>*(Filtro estadístico IQR)* | Celda 14-15<br>*(Comparativa de medias con/sin atípicos)* | **Robustez del Negocio:** Demuestra que la mejora en gasto no se debe a compradores masivos anómalos aislados. |
-| **Métrica Reina (RPV)** | No existente | No existente | No existente | Celda 15<br>*(Cálculo simple)* | Celda 16-18<br>*(Resolución formal de la Paradoja)* | **Traducción Financiera:** Unifica conversión y ticket promedio para reflejar un aumento directo del **+42.8%** por visita. |
-| **Resolución del Error Crítico** | No existente | No existente | Celda 15<br>*(Detiene ejecución por `KeyError: 'device'`)* | Celda 18<br>*(Parchado rudimentario)* | Celdas 19-23<br>*(Mapeo dinámico de variables reales)* | **Estabilidad de Software:** Elimina referencias a columnas muertas inexistentes en el archivo físico del dataset. |
-| **Reducción de Ruido** | No existente | No existente | No existente | Celda 24<br>*(Agrega V de Cramér / Bonferroni)* | Celdas Eliminadas por Diseño | **Navaja de Ockham:** Remoción de sobre-ingeniería matemática que no aportaba valor a la toma de decisiones. |
-| **Dashboard Ejecutivo** | Celdas vacías | Gráficos dispersos sin anotaciones | Gráficos individuales con `FutureWarning` | Celdas de dibujo independientes | Celda 26<br>*(Exportación de panel unificado PNG)* | **Estándar de Production-Ready:** Consolida métricas clave en una única imagen lista para el C-Level. |
----
-
-### 🔍 Análisis de Defectos y Decisiones Clave
-
-1. **Resolución del Error Crítico de Variables Inexistentes (`KeyError: 'device'`):**
-   * *Defecto:* El notebook `2_AB_Test_Analysis_mejorado.ipynb` heredaba bucles automáticos sobre variables categóricas. Al ejecutarlo, pandas detenía la compilación con un `KeyError` debido a que la columna `device` (está en español como `dispositivo` en el dataset físico) provocaba un fallo de ejecución.
-   * *Solución:* En `4_Proyecto_Final_AB_Test.ipynb` se mapeó la estructura real de variables categóricas, restringiendo el código a interactuar con las existentes: `traffic_source` y `user_type`.
-2. **Mitigación del "Efecto Novedad" mediante Análisis Temporal:**
-   * *Defecto:* En el notebook `3_AB_Test_Analysis_v2.ipynb` el eje de tiempo se presentaba sin análisis narrativo, dejando una brecha sobre si el éxito inicial era un fenómeno transitorio.
-   * *Solución:* En el notebook final se calculó la serie diaria de la tasa de conversión. El comportamiento de la Página B demostró ser superior y estable día a día durante todo el periodo (28 días del experimento), descartando anomalías por curiosidad transitoria del usuario.
-3. **Control de Outliers mediante Rango Intercuartílico (IQR):**
-   * *Defecto:* Riesgo de inflación artificial de medias de gasto por compras de usuarios atípicos aislados.
-   * *Solución:* Se aislaron los outliers de gasto (71 en la variante A y 89 en la variante B). Al recalcular y verificar que las medias sin outliers mantenían la misma brecha estructural (A: \$58.27 | B: \$65.88), se validó la robustez de los resultados comerciales.
+| **Preparación** | Celda 1 | Celda 1<br>*(Librerías básicas)* | Celda 1<br>*(Sin cambios)* | Celda 1<br>*(Herramientas extra)* | Celda 2<br>*(Diseño visual limpio y sin alertas molestas)* | Deja las bases listas, limpia la pantalla de errores visuales y unifica los colores de las gráficas. |
+| **Reparto de Usuarios** | No existente | No existente | Celda 4<br>*(Revisión por encima)* | Celda 4<br>*(Cálculo manual)* | Celda 5<br>*(Validación definitiva)* | **Garantía de equilibrio:** Nos asegura que el sistema repartió a los usuarios mitad y mitad de forma justa. |
+| **Filtro de Contaminación** | No existente | No existente | No existente | Celda 5<br>*(Cruce de usuarios)* | Celda 6<br>*(Reporte de limpiezas = 0)* | **Garantía de limpieza:** Confirma que ningún usuario vio las dos páginas al mismo tiempo para no alterar los datos. |
+| **Efecto Novedad** | No existente | No existente | No existente | Celda 6<br>*(Eje de fechas en blanco)* | Celdas 7-8<br>*(Ventas día por día)* | **Evita falsas alarmas:** Asegura que el éxito de la Página B fue constante todos los días y no solo por la novedad del estreno. |
+| **Análisis de Gasto** | Vacío asignado | Celda 5<br>*(Comparativa básica)* | Celda 6<br>*(Comparativa básica)* | Celda 10-11<br>*(Ajuste por diferencias)* | Celda 11-13<br>*(Cálculo del impacto final)* | **Matemáticas precisas:** Se adaptaron los cálculos al notar que el comportamiento del gasto variaba mucho entre grupos. |
+| **Control de Compras Altas** | No existente | No existente | No existente | Celda 12<br>*(Filtro de valores raros)* | Celda 14-15<br>*(Comparativa antes y después)* | **Datos realistas:** Demuestra que los buenos resultados son generales y no se deben a un par de compradores exageradamente ricos. |
+| **Métrica Reina (RPV)** | No existente | No existente | No existente | Celda 15<br>*(Cálculo básico)* | Celda 16-18<br>*(Resolución de la paradoja)* | **Traducción a dinero:** Une las ventas y el gasto en un solo dato para ver el impacto económico real por visita (+42.8%). |
+| **Solución de Errores** | No existente | No existente | Celda 15<br>*(Fallo que congelaba el código)* | Celda 18<br>*(Parche provisional)* | Celdas 19-23<br>*(Corrección definitiva de nombres)* | **Estabilidad:** Corrige el problema de raíz cambiando los nombres de las columnas que hacían que el programa fallara. |
+| **Limpieza de Código** | No existente | No existente | No existente | Celda 24<br>*(Cálculos matemáticos de más)* | Celdas Eliminadas por Diseño | **Simplicidad:** Quitamos fórmulas excesivamente teóricas que no ayudaban en nada a tomar decisiones de negocio. |
+| **Panel para Dirección** | Celdas vacías | Gráficos desordenados y sin textos | Gráficos individuales con alertas | Gráficos separados | Celda 26<br>*(Exportación de panel completo en imagen)* | **Listo para usar:** Agrupa las gráficas clave en una sola imagen limpia y profesional para presentar en juntas. |
 
 ---
 
-## 📈 Visualización de la Evolución de los Gráficos
+### 🔍 Problemas Encontrados y Cómo los Solucionamos
 
-Para demostrar visualmente la madurez analítica del proyecto en este repositorio, se estructuró la evolución gráfica en tres ejes fundamentales:
+1. **Reparación del error que congelaba el programa:**
+   * *El problema:* El archivo anterior intentaba buscar información usando nombres de columnas en inglés que no existían en la base de datos real (como buscar la palabra `device` cuando en el archivo real estaba escrito como `dispositivo`). Esto hacía que el programa se detuviera por completo con un mensaje de error.
+   * *La solución:* Ajustamos el código para que lea perfectamente el archivo real, usando las palabras correctas y limitándolo a analizar los datos que sí tenemos a la mano.
+2. **Controlar el "Efecto Novedad" revisando el paso de los días:**
+   * *El problema:* A veces, un diseño nuevo parece exitoso al principio simplemente porque a la gente le da curiosidad hacer clic, pero con los días el interés cae. En las pruebas anteriores no se explicaba si esto estaba pasando.
+   * *La solución:* Analizamos el comportamiento de las ventas día por día durante las 4 semanas que duró el experimento. El nuevo diseño se mantuvo arriba y estable todo el tiempo, lo que demuestra que su éxito es real y permanente.
+3. **Manejo de compradores exageradamente altos (Outliers):**
+   * *El problema:* Si una sola persona entra y compra una cantidad exagerada de dinero, puede alterar el promedio y hacernos creer que la página es un éxito cuando en realidad fue un golpe de suerte.
+   * *La solución:* Identificamos y separamos temporalmente estas compras "raras" o fuera de lo común. Al volver a calcular los promedios sin ellos, la nueva página seguía siendo igual de ganadora, lo que demuestra que el resultado es sólido.
+
+---
+
+## 📈 Evolución de las Gráficas y Reportes Visuales
+
+Mejoramos las imágenes y reportes visuales a lo largo del proyecto para que la información se entienda a primera vista:
 
 ### 1. Evolución de la Distribución de Gasto
 ![Evolución de la Distribución de Gasto](images/boxplot_gasto_evolucion.png)
-* **Notebooks anteriores:** En `1_Github_AB_Test_Analysis_Final.ipynb` y `2_AB_Test_Analysis_mejorado.ipynb`, los boxplots eran rudimentarios, carecían de etiquetas claras y generaban advertencias `FutureWarning` debido a parámetros obsoletos en Seaborn.
-* **Notebook Final:** Se implementó una vista comparativa limpia usando `hue='landing'`, removiendo advertencias y añadiendo marcas explícitas de la media aritmética junto con el aislamiento de outliers calculado por IQR.
+* *Antes:* Las gráficas eran muy básicas, no tenían explicaciones claras y el programa arrojaba advertencias de código obsoleto.
+* *Ahora:* Diseñamos una vista limpia que compara ambos grupos directamente, marca visualmente dónde está el promedio real y limpia los datos exagerados para no confundir al lector.
 
-### 2. Tasa de Conversión por Canal de Tráfico
+### 2. Comportamiento de Ventas por Canal de Tráfico
 ![Tasa de Conversión por Canal de Tráfico](images/conversion_by_traffic.png)
-* **Notebooks anteriores:** Gráficos de barras apiladas de volumen absoluto que dificultaban comparar la eficiencia relativa entre canales de distinto volumen.
-* **Notebook Final:** Gráfico de barras de tasa de conversión con etiquetas porcentuales sobre las barras y un mapa de calor que resalta la eficiencia de `Email` y `Ads`. El título muestra el Chi-cuadrado global que valida que los canales de tráfico no presentan sesgos de asignación en los grupos ($p = 0.3119$).
+* *Antes:* Se usaban barras que solo mostraban el total de personas, haciendo imposible comparar qué canal funcionaba mejor.
+* *Ahora:* Muestra los porcentajes reales de éxito de cada canal y destaca visualmente que las estrategias de **Email** y **Anuncios (Ads)** son las más potentes, confirmando que los usuarios se distribuyeron de manera justa.
 
-### 3. Tasa de Conversión por Tipo de Usuario
+### 3. Éxito según el Tipo de Usuario
 ![Tasa de Conversión por Tipo de Usuario](images/user_type_interaction.png)
-* **Notebooks anteriores:** Gráficos de barra acumulada que carecían de anotaciones de tasas porcentuales reales.
-* **Notebook Final:** Contraste dinámico de conversión por variante y segmento de usuario (Nuevo vs Recurrente). Muestra un p-valor de la prueba de Chi-cuadrado ($p = 0.7966$), lo que demuestra que la Página B es superior universalmente en ambos grupos y no requiere personalización técnica.
+* *Antes:* Gráficas acumuladas difíciles de leer y sin los números de los porcentajes a la vista.
+* *Ahora:* Muestra de forma directa cómo reaccionan los usuarios nuevos y los que ya nos conocen. Los datos confirman que la nueva página funciona mejor para ambos grupos por igual, por lo que no hace falta crear diseños personalizados para cada uno.
 
-### 4. Dashboard Ejecutivo Consolidado (C-Level Ready)
+### 4. Panel de Control Unificado (Listo para Presentaciones)
 ![Dashboard Ejecutivo Consolidado](images/executive_dashboard.png)
-* **Notebook Final:** Generación del panel integral executive-ready de 6 gráficos clave que consolida el SRM Check, la Tasa de Conversión con IC 95%, la Estabilidad temporal diaria, el Ticket promedio de compradores, el RPV (Revenue Per Visitor) y el Heatmap de conversión. Listo para su uso directo en presentaciones comerciales.
+* *Ahora:* Creamos un panel completo que junta las 6 gráficas más importantes en una sola imagen. Es ideal para enviarlo directamente al equipo directivo o usarlo en presentaciones de negocio sin tener que explicar líneas de código.
 
 ---
 
-## 🧪 Metodología Estadística (Parámetros Finales)
+## 🧪 Pruebas que Aseguran el Resultado (Método de Trabajo)
 
-Para garantizar que los resultados no fueran producto del azar, se aplicaron pruebas de hipótesis con un nivel de significancia del 5% ($\alpha = 0.05$):
+Para garantizar que nadie tomara decisiones basadas en un golpe de suerte, validamos matemáticamente los datos:
 
-1. **Garantía de Asignación (SRM Check):** Prueba Chi-cuadrado sobre volúmenes de tráfico ($A=19,982$; $B=20,018$), resultando en un $p$-valor de **0.8572** (Muestra perfectamente balanceada).
-2. **Comparación de Gasto (Ticket Promedio):** Test de Levene (varianzas no homogéneas) seguido por una **t de Welch** (`equal_var=False`), obteniendo un $p$-valor de **3.63e-21** (Confirmado mediante la prueba no paramétrica Mann-Whitney U, $p < 0.001$).
-3. **Comparación de Tasa de Conversión:** **Z-Test de Proporciones**, resultando en un $p$-valor de **3.76e-22**. Los Intervalos de Confianza al 95% para proporciones confirman la total separación física de ambas variantes.
-4. **Análisis Categórico (Chi-cuadrado):**
-   * **Distribución de Tráfico por Canal:** Sin evidencia de sesgo de asignación entre variantes ($p=0.3119$, balance de muestra perfecto).
-   * **Efecto de la Fuente de Tráfico en la Conversión:** Asociación significativa con la conversión general ($p=0.0341$), liderada por los canales de `Email` y `Ads`.
-   * **Tipo de Usuario:** Sin evidencia de asociación con la asignación ($p=0.7966$), confirmando que la Página B es **universalmente superior** tanto para usuarios nuevos como recurrentes.
+1. **Verificación de Muestras:** Confirmamos que los usuarios se dividieron de forma casi perfecta ($A = 19,982$ frente a $B = 20,018$), asegurando que el experimento es justo y equilibrado.
+2. **Comparación de lo que Gastan:** Confirmamos que el aumento en el dinero que gastan los compradores de la Página B es real y no una casualidad estadística.
+3. **Comparación de Ventas:** La ventaja de la nueva página en cuanto a cantidad de compras está totalmente respaldada y garantizada por las matemáticas.
+4. **Análisis de Canales y Clientes:** Evaluamos minuciosamente el origen del tráfico y confirmamos que la Página B es **universalmente mejor**, sin importar si el usuario viene de redes sociales, correos o si es la primera vez que nos visita.
 
 ---
 
-## 💡 Conclusiones y Recomendaciones Económicas
+## 💡 Conclusiones y Recomendaciones de Negocio
 
-1. **Implementación Definitiva al 100%:** Se recomienda migrar la totalidad del tráfico a la **Página B**. El impacto del **RPV (+42.83%)** al multiplicarse a gran escala por el volumen de tráfico de la compañía asegura un retorno financiero directo y masivo.
-2. **Estrategia de Canales:** Los canales de **Email** y **Ads** muestran las tasas de conversión más elevadas. Se aconseja canalizar e incrementar la pauta publicitaria hacia ellos utilizando la Landing Page B.
-3. **Propuesta de Valor Universal:** La prueba de Chi-cuadrado confirmó que la Página B beneficia por igual a usuarios nuevos y recurrentes. Se desaconseja realizar desarrollos de personalización de interfaz por segmentos en esta etapa, optimizando el presupuesto de IT.
+1. **Lanzar el nuevo diseño al 100% de los usuarios:** Recomendamos implementar la **Página B** de manera definitiva para todo el público. El incremento del **+42.83%** en los ingresos que genera cada visita se traducirá en un impacto de dinero directo y masivo para la compañía.
+2. **Potenciar los mejores canales:** Ya que el **Email** y los **Anuncios (Ads)** son los canales que mejor reaccionan y más compran con este nuevo diseño, sugerimos enfocar los esfuerzos y el presupuesto de marketing en estas opciones.
+3. **Mantener un diseño único:** Como el nuevo diseño demostró ser un éxito tanto para clientes nuevos como para los antiguos, no hay necesidad de gastar tiempo ni dinero del equipo de tecnología en crear versiones personalizadas por ahora. Un solo diseño es suficiente.
 
 ---
 
-## 🛠️ Tecnologías Utilizadas
-* **Lenguaje:** Python 3.10+
-* **Librerías de Análisis:** Pandas, Numpy, Scipy.stats, Statsmodels
-* **Visualización:** Matplotlib, Seaborn
+## 🛠️ Herramientas Utilizadas
+* **Lenguaje:** Python
+* **Librerías para el tratamiento de datos:** Pandas, Numpy, Scipy y Statsmodels
+* **Diseño de Gráficas:** Matplotlib y Seaborn
 
 ---
 
@@ -108,20 +106,19 @@ Para garantizar que los resultados no fueran producto del azar, se aplicaron pru
 
 ```text
 ├── 📂 notebooks/
-│   └── 📄 landing_experiment.csv      # Datos físicos del experimento A/B (40,000 registros)        
-├── 📂 notebooks/                      # Historial de iteraciones del proyecto (Linaje)
-│   ├── 📓 1_Github_AB_Test_Analysis_Final.ipynb  # Primera versión funcional básica
-│   ├── 📓 2_AB_Test_Analysis_mejorado.ipynb      # Intento de mejora con error de índice
-│   └── 📓 3_AB_Test_Analysis_v2.ipynb            # Incorporación de pruebas robustas
-├── 📂 graficos/                     # Activos visuales y gráficos exportados para el README
-│   ├── 🖼️ boxplot_gasto_evolucion.png  # Comparativa visual de distribución (V1 vs V4)
-│   ├── 🖼️ conversion_by_traffic.png    # Eficiencia y tasas por canales de adquisición
-│   ├── 🖼️ executive_dashboard.png     # Panel consolidado para C-Level
-│   └── 🖼️ user_type_interaction.png   # Interacción universal del tipo de usuario
-
-├── 📄 4_Proyecto_Final_AB_Test.ipynb # [Entregable de Producción] Versión óptima final limpia
-├── 📄 README.md                     # Documentación principal del repositorio (Este archivo)
-└── 📄 S9 Version_Student_Proyecto_Landing_Experiment.ipynb # Plantilla académica original vacía
+│   └── 📄 landing_experiment.csv       # Archivo original con los 40,000 datos del experimento
+├── 📂 notebooks/                       # Historial de versiones del proyecto
+│   ├── 📓 1_Github_AB_Test_Analysis_Final.ipynb  # Primera versión con análisis básico
+│   ├── 📓 2_AB_Test_Analysis_mejorado.ipynb      # Intento de mejora que tenía el error de nombres
+│   └── 📓 3_AB_Test_Analysis_v2.ipynb            # Versión donde se agregaron los cálculos robustos
+├── 📂 graficos/                        # Carpeta con las imágenes creadas para este reporte
+│   ├── 🖼️ boxplot_gasto_evolucion.png  # Gráfica de cuánto dinero gastan (Comparativa)
+│   ├── 🖼️ conversion_by_traffic.png    # Resultados de ventas según de dónde viene el usuario
+│   ├── 🖼️ executive_dashboard.png      # Panel completo listo para la dirección
+│   └── 🖼️ user_type_interaction.png    # Resultados según si el cliente es nuevo o viejo
+├── 📄 4_Proyecto_Final_AB_Test.ipynb  # [Archivo Final de Producción] Versión limpia, corregida y funcionando
+├── 📄 README.md                        # Este reporte explicativo
+└── 📄 S9 Version_Student_Proyecto_Landing_Experiment.ipynb # Plantilla escolar en blanco
 ```
 ---
 
