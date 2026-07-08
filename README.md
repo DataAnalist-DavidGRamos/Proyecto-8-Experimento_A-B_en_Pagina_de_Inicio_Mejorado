@@ -125,5 +125,5 @@ Para garantizar que los resultados no fueran producto del azar, se aplicaron pru
 ## Autor
 
 David Germán Ramos Rodríguez
-[LinkedIn](https://www.linkedin.com/in/david-g-ramos/) |
-[Portfolio](https://dataanalist-davidgramos.github.io/mi-sitio-web/)
+
+[LinkedIn](https://www.linkedin.com/in/david-g-ramos/) | [Portfolio](https://dataanalist-davidgramos.git
